@@ -66,7 +66,9 @@ static const struct bt_name_type bt_name_type[] = {
     {"8Bitdo SF30", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, BIT(BT_QUIRK_FACE_BTNS_INVERT)},
     {"8BitDo GBros Adapter", BT_XBOX, BT_8BITDO_GBROS, 0},
     {"8Bitdo N64 GamePad", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, BIT(BT_QUIRK_8BITDO_N64)},
-    {"8BitDo M30 gamepad", BT_XBOX, BT_XBOX_XINPUT, BIT(BT_QUIRK_8BITDO_M30)},
+    {"8BitDo M30 gamepad", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, 0},
+    // Set 8bitdo to use the hid generic and, for now, take off the quirk BIT(BT_QUIRK_8BITDO_M30) - The default map is good enough.
+    // Must find out if I can have sepparet quirk depending on the mode used.
     {"Retro Bit Bluetooth Controller", BT_XBOX, BT_XBOX_XINPUT, BIT(BT_QUIRK_FACE_BTNS_TRIGGER_TO_6BUTTONS) | BIT(BT_QUIRK_TRIGGER_PRI_SEC_INVERT)},
     {"Joy Controller", BT_XBOX, BT_XBOX_XINPUT, 0},
     {"BlueN64 Gamepad", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, BIT(BT_QUIRK_BLUEN64_N64)},
