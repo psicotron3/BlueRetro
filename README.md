@@ -1,3 +1,5 @@
+**** Forked to implement support for 8bitdo M30 with DInput instead of XInput.
+
 # BlueRetro
 ![CI](https://github.com/darthcloud/BlueRetro/workflows/CI/badge.svg)
 
