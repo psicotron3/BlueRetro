@@ -19,6 +19,11 @@
 #endif
 #define PICO_ERR_LED_PIN 20
 
+#define DEV_LED_0 14
+#define DEV_LED_1 32
+#define DEV_LED_2 33
+#define DEV_LED_3 25
+
 /* LED flags */
 enum {
     ERR_LED_SET = 0,
@@ -99,4 +104,36 @@ void err_led_pulse(void) {
 
 uint32_t err_led_get_pin(void) {
     return err_led_pin;
+}
+
+void dev_led_init()
+{
+    //
+    gpio_pad_select_gpio(DEV_LED_0);
+    gpio_pad_select_gpio(DEV_LED_1);
+    gpio_pad_select_gpio(DEV_LED_2);
+    gpio_pad_select_gpio(DEV_LED_3);
+
+    gpio_set_pull_mode(DEV_LED_0, GPIO_PULLUP_ENABLE);
+    gpio_set_pull_mode(DEV_LED_1, GPIO_PULLUP_ENABLE);
+    gpio_set_pull_mode(DEV_LED_2, GPIO_PULLUP_ENABLE);
+    gpio_set_pull_mode(DEV_LED_3, GPIO_PULLUP_ENABLE);
+    
+    gpio_set_direction(DEV_LED_0, GPIO_MODE_OUTPUT);
+    gpio_set_direction(DEV_LED_1, GPIO_MODE_OUTPUT);
+    gpio_set_direction(DEV_LED_2, GPIO_MODE_OUTPUT);
+    gpio_set_direction(DEV_LED_3, GPIO_MODE_OUTPUT);
+
+}
+
+void dev_led_set(uint8_t num, uint8_t value)
+{
+    if(num == 0)
+        gpio_set_level(DEV_LED_0, value);
+    else if(num ==1)
+        gpio_set_level(DEV_LED_1, value);
+    else if(num ==2)
+        gpio_set_level(DEV_LED_2, value);
+    else if(num ==3)
+        gpio_set_level(DEV_LED_3, value);
 }

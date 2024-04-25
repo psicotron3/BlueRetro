@@ -12,6 +12,7 @@
 #include "zephyr/att.h"
 #include "zephyr/gatt.h"
 #include "adapter/hid_parser.h"
+#include "system/led.h"
 
 enum {
     BT_ATT_HID_DEVICE_NAME = 0,
@@ -528,6 +529,9 @@ void bt_att_hid_hdlr(struct bt_dev *device, struct bt_hci_pkt *bt_hci_acl_pkt, u
                     case BT_ATT_HID_DEVICE_NAME:
                         hid_data->dev_name_hdl = read_type_rsp->data[0].handle;
                         bt_att_hid_process_device_name(device, hid_data, att_len, read_type_rsp->data[0].value, rsp_len);
+						#ifdef CONFIG_RETROSCALER_BLUERETRO_4LEDS_HW
+						dev_led_set(device->ids.id , 1);
+						#endif
                         break;
                     case BT_ATT_HID_APPEARANCE:
                         bt_att_hid_process_appearance(device, hid_data, att_len, read_type_rsp->data[0].value, rsp_len);

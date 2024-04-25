@@ -6,9 +6,15 @@ menu "BlueRetro"
         help
             Select this to enable HW2 features like port detection.
 
+    config RETROSCALER_BLUERETRO_4LEDS_HW
+        bool "RETROSCALER_BLUERETRO_4LEDS_HW"
+        default y
+        help 
+            Select this to enable Retroscaler Blueretro-NGC-4leds-hw features like wireless controller connection instruction.
+			
     choice
         prompt "Select universal or specific system"
-        default BLUERETRO_SYSTEM_UNIVERSAL
+        default BLUERETRO_SYSTEM_GC
         help
             BlueRetro is an universal adapter but you may force it to support
             only one system.
