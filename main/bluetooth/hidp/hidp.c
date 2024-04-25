@@ -44,7 +44,10 @@ static const struct bt_name_type bt_name_type[] = {
     {"8Bitdo N64 GamePad", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, BIT(BT_QUIRK_8BITDO_N64)},
     {"8BitDo N64 Modkit", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, BIT(BT_QUIRK_8BITDO_N64_MK)},
     {"8BitDo NEOGEO GP", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, BIT(BT_QUIRK_TRIGGER_PRI_SEC_INVERT)},
-    {"8BitDo M30 gamepad", BT_XBOX, BT_XBOX_XINPUT, BIT(BT_QUIRK_8BITDO_M30)},
+    {"8BitDo M30 gamepad", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, BIT(BT_QUIRK_8BITDO_M30)}, 
+    /* With BT_XBOX, BT_XBOX_XINPUT, when 8bitdo m30 connected in dinput mode Blueretro wasn't registering any button press (only worked in xinput or switch modes)
+    Changing to generic, I was able to use the controller in xinput mode or dinput mode
+    Since 8bitdo firmware 1.15 the button mappings are different in dinput or xinput modes - made some changes do load the quirk only in xinput mode - see mapping_quirks.c */
     {"8BitDo S30 Modkit", BT_XBOX, BT_XBOX_XINPUT, BIT(BT_QUIRK_8BITDO_SATURN)},
     {"8BitDo Retro Keyboard", BT_HID_GENERIC, BT_SUBTYPE_DEFAULT, 0}, /* Need to be exluded from 8bitdo catch all */
     {"8Bitdo", BT_XBOX, BT_XBOX_XINPUT, 0}, /* 8bitdo catch all, tested with SF30 Pro */
