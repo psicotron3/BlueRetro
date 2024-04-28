@@ -229,7 +229,10 @@ void mapping_quirks_apply(struct bt_data *bt_data) {
         n64_8bitdo_mk(&bt_data->raw_src_mappings[PAD]);
     }
     if (atomic_test_bit(&bt_data->base.flags[PAD], BT_QUIRK_8BITDO_M30)) {
+        /* Only load this quirk if 8bitdo is connected in xinput mode */
+        if (bt_data->base.report_id == 0x01) {
         m30_8bitdo(&bt_data->raw_src_mappings[PAD]);
+		}
     }
     if (atomic_test_bit(&bt_data->base.flags[PAD], BT_QUIRK_8BITDO_SATURN)) {
         saturn_diy_8bitdo(&bt_data->raw_src_mappings[PAD]);
