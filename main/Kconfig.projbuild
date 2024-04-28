@@ -8,7 +8,7 @@ menu "BlueRetro"
 
     config RETROSCALER_BLUERETRO_4LEDS_HW
         bool "RETROSCALER_BLUERETRO_4LEDS_HW"
-        default y
+        default n
         help 
             Select this to enable Retroscaler Blueretro-NGC-4leds-hw features like wireless controller connection instruction.
 			
