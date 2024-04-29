@@ -1,6 +1,53 @@
+# About this fork
+This is a fork from darthcloud blueretro source with the following changes:
+
+* You can connect 8bitdo m30 controller in DInput mode - "start + B" (Since Blueretro official 1.8.2 the m30 can only be connected in X-Input or Switch mode) 
+
+* Fix the color leds on Retroscaler Gamecube 4 Port Blueretro - The color leds only work with the firmware that comes preinstalled on the aliexpress device. They used different pinouts for the Leds and that's not supported on official Bluretro firmware. (The red/green/yellow/white player LEDs are connected to GPIO 14/32/33/25 respectively). 
+
+Update on 08.02.2023 - Updated to import the solution shared by Retroscaler Team (https://github.com/RetroScaler/NGC-BlueRetro/)
+
+Update on 28.04.2024 - After this PR https://github.com/darthcloud/BlueRetro/pull/886, the official firmware added a config system that can set alternate GPIOs for the leds, but just changing the leds GPIO numbers was not enough the make then work again.
+
+IMPORTANT - To compile the retroscaler leds version of the gamecube adapter you must copy configs/hw1/gamecube_rsleds to sdkconfig - configs/hw1/gamecube will compile the default version
+
+* Rumble is enabled by default
+
+I've also created a preset specific for emulators on nintendo wii using this gamecube ports blueretro device. You can load it navigating to (https://psicotron3.github.io/BlueRetroWebCfg/presets.html) and selecting the preset "GameCube Ports on Wii For Emulation". This preset works with the default retroarch-wii mapping for gamecube controllers:
+
+- Map face buttons to the corresponding label on a Switch Pro Controller (A on Switch Pro to A on GC, B to B and so on)
+- Z to minus (select)
+- R and L to corresponding digital and analog triggers
+- RZ and LZ to corresponding digital and analog triggers
+- Capture and Home mapped to Right and Left on Left Gamecube Analog (open menu on some wii emulators)
+OBS: Since 1.9.1 we need to map digital and analog gamecube LR. Mapping only Digital LR won't work. 
+
+That was necessary because on gamecube blueretro, L1 AND R1 are mapped to the same button Gamecube Z. It's not very useful when using retroarch on nintendo wii to emulate Sega/Nintendo Consoles on a Wii Console. Also, Retroarch and other wii emulators will work very well, out of the box, if Gamecube face buttons name correspond to their letters (B Gamecube is mapped to B-Face Button Down, A Gamecube is mapped to A-Face Button Right, and so on). The preset above solves those "issues".
+
+# About the 8BitDo M30 Controller:
+
+With the preset above, 8bitdo m30 in D-Input (or Switch) mode can be used to play emulated games on Wii without any other button mapping (only on genesis emulator it is necessary to configure a custom mapping to put the buttons on their respective place).
+
+D-Input mode is needed because, since 8bitdo m30 firmware 1.13, the controller maps the buttons in a strange way on X-Input mode. Buttons L/L2 to m30 Z/C and R/R2 to m30 L/R. While on D-Input mode, buttons as mapped as expected: shoulders buttons L1/R1 are mapped to Z/C on m30 and L2/R2 to L/R on m30. 
+
+When darthcloud added support for 8bitdo on version 1.8, m30 controller D-Input stopped working and, at that time, Switch mode was working but with connection issues (it's fixed now).
+
+Blueretro officel implementation fix the 8bitdo x-input strange mapping mentioned above making L1/R1 correspond to X/Z. But note, it's still different from D-Input L1/R1 to Z/C. And the necessary mapping on BlueRetro to m30 X-Input make a big mess with every other controllers buttons placement on wii reatroarch.
+
+The dirty and easy fix to this was to restore 8bitdo D-Input mode support, with buttons on right place. (Note that, if m30 is connected in X-Input mode, nothing will change from the official behavior).
+
+
+# Disclaimer
+
+This fork is not supported by Darthcloud and is intented only for Retroscaler Gamecube 4 Port Blueretro (version 1.2):
+
+![](image/1.png)
+
+
+
 # BlueRetro
 
-<p align="center"><img src="/static/PNGs/BRE_Logo_Color_Outline.png" width="600"/></p>
+<p align="center"><img src="static/PNGs/BRE_Logo_Color_Outline.png" width="600"/></p>
 <br>
 <p align="justify">BlueRetro is a multiplayer Bluetooth controllers adapter for various retro game consoles. Lost or broken controllers? Reproduction too expensive? Need those rare and obscure accessories? Just use the Bluetooth devices you already got! The project is open source hardware & software under the CERN-OHL-P-2.0 & Apache-2.0 licenses respectively. It's built for the popular ESP32 chip. Wii, Switch, PS3, PS4, PS5, Xbox One, Xbox Series X|S & generic HID Bluetooth (BR/EDR & LE) devices are supported. Parallel 1P (NeoGeo, Supergun, JAMMA, Handheld, etc), Parallel 2P (Atari 2600/7800, Master System, etc), NES, PCE / TG16, Mega Drive / Genesis, SNES, CD-i, 3DO, Jaguar, Saturn, PSX, PC-FX, JVS (Arcade), Virtual Boy, N64, Dreamcast, PS2, GameCube & Wii extension are supported with simultaneous 4+ players using a single adapter.</p>
 
@@ -42,7 +89,7 @@ Thanks to all sponsors!!
 
 <BR>
   
-  [<img src="https://github.com/darthcloud/img/blob/main/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220407151631.png" width="400"/>](https://www.aliexpress.com/item/1005004114458491.html)
+  [<img src="https://www.retroscaler.com/wp-content/uploads/2023/06/logo.png" width="400"/>](https://www.aliexpress.com/item/1005004114458491.html)
 * RetroScaler Mini Blueretro Wireless Game Controller Adapter for PS1 PS2 by [RetroScaler](https://twitter.com/RetroScaler): PS1 & PS2 single port dongle.\
   https://www.aliexpress.us/item/3256805870708776.html?gatewayAdapt=glo2usa4itemAdapt
 * RetroScaler Blueretro Wireless Game Controller Adapter for NEO.GEO by [RetroScaler](https://twitter.com/RetroScaler): Neo-Geo single port dongle.\
